@@ -677,7 +677,7 @@ class _ProfileState extends State<Profile> {
                 child: Row(children: [
                   Icon(Icons.help_outline_outlined,size: 28,),
                   SizedBox(width: 10,),
-                  Text("Help ",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500),),
+                  Text("H elp ",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500),),
                 ],),
               ),
             ),
