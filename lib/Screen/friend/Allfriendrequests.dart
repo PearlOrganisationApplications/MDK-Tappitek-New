@@ -9,7 +9,8 @@ class AllFriendrequest extends StatefulWidget {
 class _AllFriendrequestState extends State<AllFriendrequest> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(body:
+    return
+      SafeArea(child: Scaffold(body:
     Container(
       padding: EdgeInsets.only(left: 16,right: 16),
       child: Column(children: [

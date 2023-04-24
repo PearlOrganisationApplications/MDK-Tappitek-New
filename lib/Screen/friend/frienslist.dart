@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tapittek/Screen/friend/suggestionfriends.dart';
 
 import 'Allfriendrequests.dart';
+import 'Yourfriend.dart';
 class friendslist extends StatefulWidget {
   const friendslist({Key? key}) : super(key: key);
 
@@ -41,7 +43,9 @@ class _friendslistState extends State<friendslist> {
                                 )
                             )
                         ),
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddnewFriend()));
+                        },
                         child:  Text("Suggestions",style: TextStyle(color: Colors.black),)
                     ),
                   ),
@@ -61,7 +65,9 @@ class _friendslistState extends State<friendslist> {
                                 )
                             )
                         ),
-                        onPressed: (){},
+                        onPressed: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Yourfriend()));
+                        },
                         child:  Text("Your Friends",style: TextStyle(color: Colors.black),)
                     ),
                   ),
@@ -81,7 +87,10 @@ class _friendslistState extends State<friendslist> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context , int index){
-                    return Row(
+                    return
+
+
+                      Row(
                       children: [
                         CircleAvatar(
                           radius: 40.0,
@@ -92,13 +101,14 @@ class _friendslistState extends State<friendslist> {
                         SizedBox(width: 10,),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             //Text("Govind Kumar"),
                             Text("Govind Kumar",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
                             SizedBox(height: 5,),
                             Row(
                               //crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 //Text("Nidhi",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w700),),
                                 SizedBox(
@@ -121,12 +131,12 @@ class _friendslistState extends State<friendslist> {
                                   ),
                                 ),
                                 SizedBox(width: 10,),
+                                //Spacer(),
                                 SizedBox(
                                   height: 40,
                                   //width: double.infinity,
                                   child:
                                   ElevatedButton(
-
                                       style: ButtonStyle(
                                           backgroundColor: MaterialStateProperty.all( Color(0xffed5555)),
                                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -140,14 +150,11 @@ class _friendslistState extends State<friendslist> {
                                       child:  Text("Delete",style: TextStyle(color: Colors.black),)
                                   ),
                                 ),
-
                               ],),
                           ],),
-
                       ],);
-
                   },
-                  itemCount: 2,
+                  itemCount: 5,
                 ),
               ),
               SizedBox(height: 16,),
@@ -187,7 +194,8 @@ SizedBox(height: 10,),
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context , int index){
-                    return Row(
+                    return
+                      Row(
                       children: [
                         CircleAvatar(
                           radius: 40.0,

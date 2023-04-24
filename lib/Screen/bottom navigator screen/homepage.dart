@@ -8,6 +8,8 @@ import '../../Model/GetUserPost.dart';
 import '../../Model/alluserpostModel.dart';
 import '../../Utils/Api_collection.dart';
 import '../../Utils/app_preferences.dart';
+import '../Chat/chatfriendlist.dart';
+import '../Chat/my_chat.dart';
 import '../LoginFlow/SignIn.dart';
 import '../drawernavigator/device_compatibility.dart';
 import 'Notification.dart';
@@ -67,39 +69,39 @@ class _homepageState extends State<homepage> {
 
       child: SafeArea(child: Scaffold(
         appBar: AppBar(
-          actions: [
-
-            PopupMenuButton(
-              // add icon, by default "3 dot" icon
-              // icon: Icon(Icons.book)
-                itemBuilder: (context){
-                  return [
-                    /*PopupMenuItem<int>(
-                      value:0,
-                      child: Text("My account"),
-                    ),
-                    PopupMenuItem<int>(
-                      value: 1,
-                      child: Text("Settings"),
-                    ),
-
-                    PopupMenuItem<int>(
-                      value: 2,
-                      child: Text("Logout"),
-                    ),*/
-                  ];
-                },
-                onSelected:(value){
-                  if(value == 0){
-                    print("My account menu is selected.");
-                  }else if(value == 1){
-                    print("Settings menu is selected.");
-                  }else if(value == 2){
-                    print("Logout menu is selected.");
-                  }
-                }
-            ),
-          ],
+          // actions: [
+          //
+          //   PopupMenuButton(
+          //     // add icon, by default "3 dot" icon
+          //     // icon: Icon(Icons.book)
+          //       itemBuilder: (context){
+          //         return [
+          //           /*PopupMenuItem<int>(
+          //             value:0,
+          //             child: Text("My account"),
+          //           ),
+          //           PopupMenuItem<int>(
+          //             value: 1,
+          //             child: Text("Settings"),
+          //           ),
+          //
+          //           PopupMenuItem<int>(
+          //             value: 2,
+          //             child: Text("Logout"),
+          //           ),*/
+          //         ];
+          //       },
+          //       onSelected:(value){
+          //         if(value == 0){
+          //           print("My account menu is selected.");
+          //         }else if(value == 1){
+          //           print("Settings menu is selected.");
+          //         }else if(value == 2){
+          //           print("Logout menu is selected.");
+          //         }
+          //       }
+          //   ),
+          // ],
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.black),
           title: Padding(
@@ -107,7 +109,12 @@ class _homepageState extends State<homepage> {
             child: Row(children: [
               Text("Tapittek",style: TextStyle(fontStyle: FontStyle.italic,fontWeight: FontWeight.w700,fontSize:35,color:Color(
                   0xfff8d026)),),
-
+                 Spacer(),
+               InkWell(
+                   onTap: (){
+                     Navigator.push(context, MaterialPageRoute(builder: (context)=>chatfriendlist()));
+                   },
+                   child: Icon(Icons.chat)),
             ],),
           ),
         ),
