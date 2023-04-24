@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:country_state_city_picker/country_state_city_picker.dart';
 import 'package:dob_input_field/dob_input_field.dart';
 import 'package:flutter/material.dart';
