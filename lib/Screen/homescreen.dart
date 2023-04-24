@@ -5,6 +5,7 @@ import 'bottom navigator screen/homepage.dart';
 import 'bottom navigator screen/Profile/profile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'drawernavigator/device_compatibility.dart';
+import 'friend/frienslist.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     homepage(),
     homepage(),
+    friendslist(),
     Notificationscreen(),
     Profile(),
     // socialmedialink(),
@@ -89,9 +91,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icon(Icons.home),
                   label: 'Home',
                 ),
+
                 BottomNavigationBarItem(
                   icon: Icon(Icons.qr_code_scanner),
                   label: 'Scanner',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.people_alt_sharp),
+                  label: 'Friends',
                 ),
                 /*    BottomNavigationBarItem(
               icon: Icon(Icons.recycling_rounded),

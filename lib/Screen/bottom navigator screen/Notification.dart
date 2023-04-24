@@ -257,7 +257,8 @@ class _NotificationscreenState extends State<Notificationscreen> {
 }
 
 Widget list(){
-  return  Container(
+  return
+    Container(
     padding: EdgeInsets.only(top: 23,left: 16,right: 16),
     child: ListView.separated(
       separatorBuilder: (context, index) {

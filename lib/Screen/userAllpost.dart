@@ -104,7 +104,9 @@ class _userpostsState extends State<userposts> {
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 itemBuilder: (context, int index) {
-                                  return Column(children: [
+                                  return
+                                    Column(
+                                    children: [
                                     // Text("Govind"),
                                     Column(
                                       crossAxisAlignment: CrossAxisAlignment
@@ -229,7 +231,8 @@ class _userpostsState extends State<userposts> {
                                       ],
                                     ),
 
-                                  ],);
+                                  ],
+                                  );
                                 },
                                 itemCount: snapshot.data!.posts!.length,
                                 //itemCount: 10,
