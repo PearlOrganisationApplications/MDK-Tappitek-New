@@ -626,8 +626,8 @@ class _ProfileState extends State<Profile> {
                   SizedBox(height: 25,),
                   InkWell(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (context) => Notificationscreen()));
+                      // Navigator.push(context, MaterialPageRoute(
+                      //     builder: (context) => Notificationscreen()));
                     },
                     child: Row(children: [
                       Icon(Icons.supervised_user_circle,size: 28,),
@@ -642,8 +642,8 @@ class _ProfileState extends State<Profile> {
               title:
               InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => Notificationscreen()));
+                  // Navigator.push(context, MaterialPageRoute(
+                  //     builder: (context) => Notificationscreen()));
                 },
                 child: Row(children: [
                   Icon(Icons.supervised_user_circle,size: 28,),
@@ -671,8 +671,8 @@ class _ProfileState extends State<Profile> {
               title:
               InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => Notificationscreen()));
+                  // Navigator.push(context, MaterialPageRoute(
+                  //     builder: (context) => Notificationscreen()));
                 },
                 child: Row(children: [
                   Icon(Icons.help_outline_outlined,size: 28,),
@@ -685,8 +685,8 @@ class _ProfileState extends State<Profile> {
               title:
               InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => Notificationscreen()));
+                  // Navigator.push(context, MaterialPageRoute(
+                  //     builder: (context) => Notificationscreen()));
                 },
                 child: Row(children: [
                   Icon(Icons.settings,size: 28,),
