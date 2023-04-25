@@ -1,11 +1,16 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import '../Const/image_const.dart';
+import '../Model/GetUserPost.dart';
+import '../Utils/app_preferences.dart';
 import 'bottom navigator screen/Notification.dart';
 import 'bottom navigator screen/homepage.dart';
 import 'bottom navigator screen/Profile/profile.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'drawernavigator/device_compatibility.dart';
 import 'friend/frienslist.dart';
+import 'package:http/http.dart' as http;
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
@@ -109,12 +114,59 @@ class _HomeScreenState extends State<HomeScreen> {
                   label: 'Notification',
                 ),
                 BottomNavigationBarItem(
-                  icon: CircleAvatar(
-                    radius: 20.0,
-                    backgroundImage:
-                    NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQThNbRv-cwCjO9vnelKnZqbxy4qQcl3Xdcrhf4C8xHsg&usqp=CAU&ec=48600112"),
-                    backgroundColor: Colors.transparent,
-                  ),
+                   icon:
+                   FutureBuilder<GetUserPost?>(
+                       future:  userprofile(),
+                       builder: (context, snapshot) {
+
+                         if (snapshot.hasData) {
+                           late bool photoUrl;
+                           try {
+                             int a = snapshot.data!.posts!.isEmpty ? 0: 10 ?? 0;
+                             photoUrl = a==0? false:true;
+                           }catch (e){
+                           }
+                           print(photoUrl);
+                           return Column(
+                             children: [
+                               //Commonappbar(),
+                               CircleAvatar(
+                                 radius: 18.0,
+                                 backgroundColor: Colors.green,
+                                 child:photoUrl?
+                                 ClipRRect(
+                                   borderRadius: BorderRadius.circular(100),
+                                   child: Image.network(snapshot.data!.posts![0].userDetails![0].profileImage.toString(), width: 50,
+                                     height: 50,fit: BoxFit.fill,),
+                                 )
+                                     :
+                                 InkWell(
+                                   //onTap: imagePickerOption,
+                                   child: Image.asset(
+                                     ImageConst().UPLOAD_IMAGES,
+                                     width: 33,
+                                     height: 33,
+                                     fit: BoxFit.cover,
+                                   ),
+                                 ),
+                               ),
+
+                             ],
+                           );
+                         }
+                         else{
+                           return Center(child: CircularProgressIndicator());
+                         }
+
+                       }
+                   ),
+
+                  // CircleAvatar(
+                  //   radius: 20.0,
+                  //   backgroundImage:
+                  //   NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQThNbRv-cwCjO9vnelKnZqbxy4qQcl3Xdcrhf4C8xHsg&usqp=CAU&ec=48600112"),
+                  //   backgroundColor: Colors.transparent,
+                  // ),
                   label: 'Profile',
                 ),
               ],
@@ -312,7 +364,20 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );*//*
   }*/
+}
 
 
+Future<GetUserPost?> userprofile() async {
+  var headers = {
+    'Authorization': 'Bearer '+"${AppPreferences.getToken()!}"
+  };
+  final response = await http.post(
+    Uri.parse('https://test.pearl-developer.com/mdk/public/api/get-user-posts'),
+    headers: headers,
 
+  );
+  print(response.statusCode);
+  if (response.statusCode == 200) {
+    return GetUserPost.fromJson(jsonDecode(response.body));
+  }
 }

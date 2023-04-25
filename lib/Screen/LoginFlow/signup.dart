@@ -14,6 +14,7 @@ import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../Utils/app_preferences.dart';
 import 'SignIn.dart';
 import '../homescreen.dart';
@@ -140,7 +141,6 @@ class _signupscreenState extends State<signupscreen> {
       debugPrint(error.toString());
     }
   }
-
 
 
   var _email = '';
@@ -829,9 +829,13 @@ class _signupscreenState extends State<signupscreen> {
                             )
                         )
                     ),
-                    onPressed: (){
+                    onPressed: () async {
                       login(nameController.text.toString(),phoneController.text.toString(),emailController.text.toString(), passwordController.text.toString());
 
+
+                      SharedPreferences pref =
+                          await SharedPreferences.getInstance();
+                      pref.setString("email", emailController.text);
 
                      // Navigator.push(context, MaterialPageRoute(builder: (context) =>  HomeScreen()));
                     },

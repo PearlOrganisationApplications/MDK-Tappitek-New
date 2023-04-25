@@ -25,50 +25,56 @@ class _friendslistState extends State<friendslist> {
               Text("Friends",style: TextStyle(fontSize: 40,fontWeight: FontWeight.w700),),
               Row(
                 //crossAxisAlignment: CrossAxisAlignment.start,
-                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   //Text("Nidhi",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w700),),
-                  SizedBox(
-                    height: 40,
-                    // width: double.infinity,
-                    child:
-                    ElevatedButton(
+                  Expanded(
+                    flex: 1,
+                    child: SizedBox(
+                      height: 40,
+                       //width: double.infinity,
+                      child:
+                      ElevatedButton(
 
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all( Colors.lightBlue),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(19.0),
-                                  // side: BorderSide(color: Colors.red)
-                                )
-                            )
-                        ),
-                        onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddnewFriend()));
-                        },
-                        child:  Text("Suggestions",style: TextStyle(color: Colors.black),)
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all( Colors.lightBlue),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(19.0),
+                                    // side: BorderSide(color: Colors.red)
+                                  )
+                              )
+                          ),
+                          onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>AddnewFriend()));
+                          },
+                          child:  Text("Suggestions",style: TextStyle(color: Colors.black),)
+                      ),
                     ),
                   ),
                   SizedBox(width: 10,),
-                  SizedBox(
-                    height: 40,
-                    //width: double.infinity,
-                    child:
-                    ElevatedButton(
+                  Expanded(
+                    flex: 1,
+                    child: SizedBox(
+                      height: 40,
+                      width: double.infinity,
+                      child:
+                      ElevatedButton(
 
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all( Colors.grey),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(19.0),
-                                  // side: BorderSide(color: Colors.red)
-                                )
-                            )
-                        ),
-                        onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Yourfriend()));
-                        },
-                        child:  Text("Your Friends",style: TextStyle(color: Colors.black),)
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all( Colors.grey),
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(19.0),
+                                    // side: BorderSide(color: Colors.red)
+                                  )
+                              )
+                          ),
+                          onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>Yourfriend()));
+                          },
+                          child:  Text("Your Friends",style: TextStyle(color: Colors.black),)
+                      ),
                     ),
                   ),
 
@@ -101,7 +107,7 @@ class _friendslistState extends State<friendslist> {
                         SizedBox(width: 10,),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             //Text("Govind Kumar"),
                             Text("Govind Kumar",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
@@ -113,10 +119,9 @@ class _friendslistState extends State<friendslist> {
                                 //Text("Nidhi",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w700),),
                                 SizedBox(
                                   height: 40,
-                                  // width: double.infinity,
+                                  width: 110,
                                   child:
                                   ElevatedButton(
-
                                       style: ButtonStyle(
                                           backgroundColor: MaterialStateProperty.all( Colors.greenAccent),
                                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -134,7 +139,7 @@ class _friendslistState extends State<friendslist> {
                                 //Spacer(),
                                 SizedBox(
                                   height: 40,
-                                  //width: double.infinity,
+                                  width: 110,
                                   child:
                                   ElevatedButton(
                                       style: ButtonStyle(
@@ -217,6 +222,8 @@ SizedBox(height: 10,),
                                 //Text("Nidhi",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w700),),
                                 SizedBox(
                                   height: 40,
+                                  width: 110,
+
                                   // width: double.infinity,
                                   child:
                                   ElevatedButton(
@@ -237,6 +244,8 @@ SizedBox(height: 10,),
                                 SizedBox(width: 10,),
                                 SizedBox(
                                   height: 40,
+                                  width: 110,
+
                                   //width: double.infinity,
                                   child:
                                   ElevatedButton(

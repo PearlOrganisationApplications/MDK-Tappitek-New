@@ -538,7 +538,7 @@ class _ProfileState extends State<Profile> {
             else{
                 if(snapshot.hasError){
                 return Container(
-                  child: Center(child: Text("Eroor")),
+                  child: Center(child: Text("Reload again")),
                 );
               }
             }

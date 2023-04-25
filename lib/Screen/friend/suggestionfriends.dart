@@ -67,6 +67,8 @@ class _AddnewFriendState extends State<AddnewFriend> {
                                     //Text("Nidhi",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w700),),
                                     SizedBox(
                                       height: 40,
+                                      width: 110,
+
                                       // width: double.infinity,
                                       child:
                                       ElevatedButton(
@@ -87,6 +89,8 @@ class _AddnewFriendState extends State<AddnewFriend> {
                                     SizedBox(width: 10,),
                                     SizedBox(
                                       height: 40,
+                                      width: 110,
+
                                       //width: double.infinity,
                                       child:
                                       ElevatedButton(

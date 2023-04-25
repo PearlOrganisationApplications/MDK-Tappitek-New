@@ -1,4 +1,4 @@
-package com.pearlorganisation.tapittek
+package com.pearl.tapittek
 
 import io.flutter.embedding.android.FlutterActivity
 

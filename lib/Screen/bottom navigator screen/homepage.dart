@@ -10,6 +10,7 @@ import '../../Utils/Api_collection.dart';
 import '../../Utils/app_preferences.dart';
 import '../Chat/chatfriendlist.dart';
 import '../Chat/my_chat.dart';
+import '../Commentsbox.dart';
 import '../LoginFlow/SignIn.dart';
 import '../drawernavigator/device_compatibility.dart';
 import 'Notification.dart';
@@ -44,10 +45,19 @@ class homepage extends StatefulWidget {
 // }
 
 
-class _homepageState extends State<homepage> {
+class _homepageState extends State<homepage>with TickerProviderStateMixin  {
 
 
+  late final AnimationController _controller = AnimationController(
+      duration:  Duration(milliseconds: 200), vsync: this, value: 1.0);
 
+  bool _isFavorite = false;
+
+  @override
+  void dispose() {
+    super.dispose();
+    _controller.dispose();
+  }
 
 
 
@@ -57,6 +67,7 @@ class _homepageState extends State<homepage> {
     // then
     return true; // return true if the route to be popped
   }
+
   @override
   Widget build(BuildContext context) {
 
@@ -218,25 +229,49 @@ class _homepageState extends State<homepage> {
                                                   children: [
 
 
-                                                    InkWell(
-
+                                                    GestureDetector(
                                                       onTap: () {
-                                                        print("okkkk");
-                                                        {
-                                                          setState(() {
-                                                            _isTap = false;
-                                                          });
-                                                        }
+                                                        setState(() {
+                                                          _isFavorite = !_isFavorite;
+                                                        });
+                                                        _controller
+                                                            .reverse()
+                                                            .then((value) => _controller.forward());
                                                       },
-                                                      child: Icon(Icons
-                                                          .thumb_up_alt_rounded,
-                                                          color: (_isTap) ? Colors
-                                                              .yellow : Colors
-                                                              .deepOrange),
-
+                                                      child: Row(
+                                                        children: [
+                                                          ScaleTransition(
+                                                            scale: Tween(begin: 0.7, end: 1.0).animate(
+                                                                CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
+                                                            child: _isFavorite
+                                                                ? const Icon(
+                                                              Icons.favorite,
+                                                              size: 30,
+                                                              color: Colors.red,
+                                                            )
+                                                                : const Icon(
+                                                              Icons.favorite_border,
+                                                              size: 30,
+                                                            ),
+                                                          ),
+                                                          Text(" Like"),
+                                                        ],
+                                                      ),
                                                     ),
+
+
+
                                                     SizedBox(width: 30,),
-                                                    Icon(Icons.comment),
+                                                    InkWell(
+                                                      onTap:(){
+                                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Commentsbox()));
+                                                      },
+                                                        child: Row(
+                                                          children: [
+                                                            Icon(Icons.comment),
+                                                            Text(" Comment"),
+                                                          ],
+                                                        )),
 
 
                                                     SizedBox(width: 30,),
@@ -620,6 +655,12 @@ Future<GetUserPost?> createAlbum( ) async {
     return GetUserPost.fromJson(jsonDecode(response.body));
   }
 }
+
+
+
+
+
+
 Future<GetUserPost?> userprofile() async {
   var headers = {
     'Authorization': 'Bearer '+"${AppPreferences.getToken()!}"
