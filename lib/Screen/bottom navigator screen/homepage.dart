@@ -445,7 +445,7 @@ class _homepageState extends State<homepage>with TickerProviderStateMixin  {
                   child: Row(children: [
                     Icon(Icons.phone_android,size: 28,),
                     SizedBox(width: 10,),
-                    Text("Device compatibility",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500),),
+                    Text("Device compatibility ",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500),),
                   ],),
                 ),
               ),
