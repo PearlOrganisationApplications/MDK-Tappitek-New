@@ -349,11 +349,9 @@ class _ProfileState extends State<Profile> {
                                 ),
                               ),
 
-
                               SizedBox(width: 10,),
                               Expanded(
                                 child: Column(children: [
-
                                   TextField(
                                     controller: usernameController,
                                     enabled: isEnabled,

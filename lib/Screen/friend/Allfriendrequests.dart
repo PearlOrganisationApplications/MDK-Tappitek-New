@@ -54,61 +54,66 @@ class _AllFriendrequestState extends State<AllFriendrequest> {
                             backgroundColor: Colors.transparent,
                           ),
                           SizedBox(width: 10,),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              //Text("Govind Kumar"),
-                              Text("Govind Kumar",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
-                              SizedBox(height: 5,),
-                              Row(
-                                //crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  //Text("Nidhi",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w700),),
-                                  SizedBox(
-                                    height: 40,
-                                    width: 110,
-                                    // width: double.infinity,
-                                    child:
-                                    ElevatedButton(
+                          Expanded(
+                            flex:1,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text("Govind Kumar",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
 
-                                        style: ButtonStyle(
-                                            backgroundColor: MaterialStateProperty.all( Colors.greenAccent),
-                                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(12.0),
-                                                  // side: BorderSide(color: Colors.red)
+                                Row(
+                                  //crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    //Text("Nidhi",style: TextStyle(fontSize: 13,fontWeight: FontWeight.w700),),
+                                    Expanded(
+                                      flex: 1,
+                                      child: SizedBox(
+                                        height: 40,
+                                        width: double.infinity,
+                                        child:
+                                        ElevatedButton(
+                                            style: ButtonStyle(
+                                                backgroundColor: MaterialStateProperty.all( Colors.greenAccent),
+                                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                    RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(12.0),
+                                                      // side: BorderSide(color: Colors.red)
+                                                    )
                                                 )
-                                            )
+                                            ),
+                                            onPressed: (){},
+                                            child:  Text("Confirm",style: TextStyle(color: Colors.black),)
                                         ),
-                                        onPressed: (){},
-                                        child:  Text("Confirm",style: TextStyle(color: Colors.black),)
+                                      ),
                                     ),
-                                  ),
-                                  SizedBox(width: 10,),
-                                  SizedBox(
-                                    height: 40,
-                                    width: 110,
-                                    //width: double.infinity,
-                                    child:
-                                    ElevatedButton(
-
-                                        style: ButtonStyle(
-                                            backgroundColor: MaterialStateProperty.all( Color(0xffed5555)),
-                                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                                RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(12.0),
-                                                  // side: BorderSide(color: Colors.red)
+                                    SizedBox(width: 10,),
+                                    //Spacer(),
+                                    Expanded(
+                                      flex: 1,
+                                      child: SizedBox(
+                                        height: 40,
+                                        width: double.infinity,
+                                        child:
+                                        ElevatedButton(
+                                            style: ButtonStyle(
+                                                backgroundColor: MaterialStateProperty.all( Color(0xffed5555)),
+                                                shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                                    RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(12.0),
+                                                      // side: BorderSide(color: Colors.red)
+                                                    )
                                                 )
-                                            )
+                                            ),
+                                            onPressed: (){},
+                                            child:  Text("Delete",style: TextStyle(color: Colors.black),)
                                         ),
-                                        onPressed: (){},
-                                        child:  Text("Delete",style: TextStyle(color: Colors.black),)
+                                      ),
                                     ),
-                                  ),
-
-                                ],),
-                            ],),
+                                  ],),
+                              ],
+                            ),
+                          ),
 
                         ],);
 
