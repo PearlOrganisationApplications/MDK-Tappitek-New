@@ -176,6 +176,7 @@ class _signupscreenState extends State<signupscreen> {
   TextEditingController emailController =   TextEditingController();
   TextEditingController phoneController =   TextEditingController();
   TextEditingController nameController =   TextEditingController();
+  TextEditingController uniquenumber =   TextEditingController();
   bool _validate = false;
   TextEditingController passwordController =  TextEditingController();
   TextEditingController confirmpasswordController =  TextEditingController();
@@ -576,7 +577,7 @@ class _signupscreenState extends State<signupscreen> {
                     ),
 
                     child: GenderPickerWithImage(
-                      showOtherGender: true,
+                      showOtherGender: false,
                       verticalAlignedText: false,
                       selectedGender: Gender.Male,
                       selectedGenderTextStyle: TextStyle(
@@ -798,12 +799,13 @@ class _signupscreenState extends State<signupscreen> {
             Padding(
               padding: const EdgeInsets.all(30),
               child: TextField(
-                keyboardType: TextInputType.number,
-                inputFormatters: [
-                  // FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                  FilteringTextInputFormatter.digitsOnly
-
-                ],
+                controller: uniquenumber,
+                //keyboardType: TextInputType.number,
+                // inputFormatters: [
+                //   // FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                //   FilteringTextInputFormatter.digitsOnly
+                //
+                // ],
                 decoration: InputDecoration(
                   //floatingLabelBehavior: FloatingLabelBehavior.never, //Hides label on focus or if filled
                   labelText: "Verification code",
@@ -830,14 +832,15 @@ class _signupscreenState extends State<signupscreen> {
                         )
                     ),
                     onPressed: () async {
-                      login(nameController.text.toString(),phoneController.text.toString(),emailController.text.toString(), passwordController.text.toString());
+                      uniqueid(uniquenumber.text.toString());
+                     // login(nameController.text.toString(),phoneController.text.toString(),emailController.text.toString(), passwordController.text.toString());
 
 
-                      SharedPreferences pref =
-                          await SharedPreferences.getInstance();
-                      pref.setString("email", emailController.text);
-
-                     // Navigator.push(context, MaterialPageRoute(builder: (context) =>  HomeScreen()));
+                      // SharedPreferences pref =
+                      //     await SharedPreferences.getInstance();
+                      // pref.setString("email", emailController.text);
+                      //
+                      // Navigator.push(context, MaterialPageRoute(builder: (context) =>  HomeScreen()));
                     },
                     child:  Text("Confirm",style: TextStyle(color: Colors.white,fontSize: 20),)
                 ),
@@ -849,6 +852,71 @@ class _signupscreenState extends State<signupscreen> {
       },
     );
   }
+
+
+
+
+
+
+  Future uniqueid(uniquecode )async{
+    try {
+      var request = http.MultipartRequest('POST', Uri.parse(
+          'https://test.pearl-developer.com/mdk/public/api/check-uniqueval'));
+      request.fields.addAll({
+        'value': uniquecode,
+      });
+
+
+      http.StreamedResponse response = await request.send();
+
+      if (response.statusCode == 200) {
+        await response.stream.bytesToString().then((value) async {
+          print('<----- ${value} ----->');
+          var item = jsonDecode(value);
+
+          print('12345678------> ${item['status']} <------12345678');
+          if(item['status'] == '201'){
+            print("successfully");
+            login(nameController.text.toString(),phoneController.text.toString(),emailController.text.toString(), passwordController.text.toString());
+            SharedPreferences pref =
+            await SharedPreferences.getInstance();
+            pref.setString("email", emailController.text);
+            Fluttertoast.showToast(msg: "Registered Successfully ");
+          }
+          else{
+            Fluttertoast.showToast(msg: "Invalid Code");
+
+          }
+
+
+        });
+        //print("Successfuly");
+         //login(nameController.text.toString(),phoneController.text.toString(),emailController.text.toString(), passwordController.text.toString());
+        // SharedPreferences pref =
+        // await SharedPreferences.getInstance();
+        // pref.setString("email", emailController.text);
+        //Fluttertoast.showToast(msg: " Done ");
+
+
+
+        // Navigator.push(context, MaterialPageRoute(builder: (context) =>  HomeScreen()));
+      }
+      else {
+        print(response.reasonPhrase);
+        print("Sorryyy");
+        Fluttertoast.showToast(msg: "Invalid value");
+
+      }
+    }
+    catch(e){
+      print(e);
+    }
+  }
+
+
+
+
+
 
 }
 

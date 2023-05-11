@@ -118,8 +118,8 @@ class _homepageState extends State<homepage>with TickerProviderStateMixin  {
           title: Padding(
             padding: const EdgeInsets.only(left: 16,right: 16,top: 10,bottom: 10),
             child: Row(children: [
-              Text("Tapittek",style: TextStyle(fontStyle: FontStyle.italic,fontWeight: FontWeight.w700,fontSize:35,color:Color(
-                  0xfff8d026)),),
+              //Text("Tapittek",style: TextStyle(fontStyle: FontStyle.italic,fontWeight: FontWeight.w700,fontSize:35,color:Color(
+                  //0xfff8d026)),),
                  Spacer(),
                InkWell(
                    onTap: (){
@@ -130,7 +130,8 @@ class _homepageState extends State<homepage>with TickerProviderStateMixin  {
           ),
         ),
 
-        body: FutureBuilder<GetUserPost?>(
+        body:
+        FutureBuilder<GetUserPost?>(
             future:  createAlbum(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {

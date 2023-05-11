@@ -1,12 +1,16 @@
 
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tapittek/Utils/configuration.dart';
 import '../../../Const/image_const.dart';
@@ -190,6 +194,14 @@ class _ProfileState extends State<Profile> {
       print(e);
     }
   }
+
+
+
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -716,7 +728,9 @@ class _ProfileState extends State<Profile> {
       ),
 
     ));
+
   }
+
 
 
   // Future registrationUser(String name,image)async
@@ -747,6 +761,7 @@ class _ProfileState extends State<Profile> {
   // }
 
 }
+
 
 
 Future<GetUserPost?> createAlbum() async {
