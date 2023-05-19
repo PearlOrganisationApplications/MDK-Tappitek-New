@@ -320,32 +320,28 @@ class _friendslistState extends State<friendslist> {
                                   // Text(snapshot.data![index].name.toString()),
                                   //Text(snapshot.data!.users![index].name ??""),
 
-                                  CircleAvatar(
-                                    radius: 30.0,
-                                    backgroundColor: Colors.grey,
-                                    child:snapshot.data![index].profileImage.toString().isNotEmpty
-                                        ?
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(100),
-                                      child: Image.network(snapshot.data![index].profileImage.toString(), width: 60,
-                                        height: 60,fit: BoxFit.fill,),
-                                    )
-                                        :
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(100),
-                                      child: Icon(Icons.ac_unit),
-                                      //Image.asset("assets/dp.jpg"),                                      )
-                                    ),
-                                  ),
-
-
                                   // CircleAvatar(
-                                  //   radius: 40.0,
-                                  //   backgroundImage: NetworkImage(snapshot.data![index].profileImage ?? ""
-                                  //      // "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"
-                                  //   ),
+                                  //   radius: 30.0,
                                   //   backgroundColor: Colors.grey,
+                                  //   child:
+                                  //   Image.network(snapshot.data![index].profileImage.toString(), width: 60,
+                                  //     height: 60,fit: BoxFit.fill,)
+                                  //   //     :
+                                  //   // ClipRRect(
+                                  //   //   borderRadius: BorderRadius.circular(100),
+                                  //   //   child: Icon(Icons.ac_unit),
+                                  //   //   //Image.asset("assets/dp.jpg"),                                      )
+                                  //   // ),
                                   // ),
+
+
+                                  CircleAvatar(
+                                    radius: 40.0,
+                                    backgroundImage: NetworkImage(snapshot.data![index].profileImage ?? ""
+                                       // "https://media.sproutsocial.com/uploads/2022/06/profile-picture.jpeg"
+                                    ),
+                                    backgroundColor: Colors.grey,
+                                  ),
 
                                   SizedBox(width: 10,),
                                   Expanded(

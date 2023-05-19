@@ -29,6 +29,8 @@ class Posts {
   int? userId;
   String? image;
   String? text;
+  int? likeCount;
+  int? commentCount;
   String? createdAt;
   String? updatedAt;
   String? postImage;
@@ -39,6 +41,8 @@ class Posts {
         this.userId,
         this.image,
         this.text,
+        this.likeCount,
+        this.commentCount,
         this.createdAt,
         this.updatedAt,
         this.postImage,
@@ -49,6 +53,8 @@ class Posts {
     userId = json['user_id'];
     image = json['image'];
     text = json['text'];
+    likeCount = json['like_count'];
+    commentCount = json['comment_count'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     postImage = json['post_image'];
@@ -66,6 +72,8 @@ class Posts {
     data['user_id'] = this.userId;
     data['image'] = this.image;
     data['text'] = this.text;
+    data['like_count'] = this.likeCount;
+    data['comment_count'] = this.commentCount;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['post_image'] = this.postImage;
@@ -82,7 +90,14 @@ class UserDetails {
   String? phone;
   String? email;
   String? profile;
-  String? about;
+  Null? currentAddress;
+  Null? pincode;
+  Null? country;
+  Null? state;
+  Null? city;
+  Null? doB;
+  Null? gender;
+  Null? about;
   String? createdAt;
   String? updatedAt;
   String? profileImage;
@@ -93,6 +108,13 @@ class UserDetails {
         this.phone,
         this.email,
         this.profile,
+        this.currentAddress,
+        this.pincode,
+        this.country,
+        this.state,
+        this.city,
+        this.doB,
+        this.gender,
         this.about,
         this.createdAt,
         this.updatedAt,
@@ -104,6 +126,13 @@ class UserDetails {
     phone = json['phone'];
     email = json['email'];
     profile = json['profile'];
+    currentAddress = json['current_address'];
+    pincode = json['pincode'];
+    country = json['country'];
+    state = json['state'];
+    city = json['city'];
+    doB = json['DoB'];
+    gender = json['Gender'];
     about = json['about'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
@@ -117,6 +146,13 @@ class UserDetails {
     data['phone'] = this.phone;
     data['email'] = this.email;
     data['profile'] = this.profile;
+    data['current_address'] = this.currentAddress;
+    data['pincode'] = this.pincode;
+    data['country'] = this.country;
+    data['state'] = this.state;
+    data['city'] = this.city;
+    data['DoB'] = this.doB;
+    data['Gender'] = this.gender;
     data['about'] = this.about;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;

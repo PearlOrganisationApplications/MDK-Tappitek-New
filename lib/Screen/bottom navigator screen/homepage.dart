@@ -46,6 +46,23 @@ class homepage extends StatefulWidget {
 
 
 class _homepageState extends State<homepage>with TickerProviderStateMixin  {
+  String? Email;
+  void getEmail() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    String? email = pref.getString("email");
+    setState(() {
+      Email = email;
+    });
+    print("amit emailllllllllllll"+"${Email}");
+
+  }
+
+  @override
+  void initState() {
+    getEmail();
+    super.initState();
+    // post = fetchPost();
+  }
 
 
   late final AnimationController _controller = AnimationController(
@@ -119,209 +136,215 @@ class _homepageState extends State<homepage>with TickerProviderStateMixin  {
             padding: const EdgeInsets.only(left: 16,right: 16,top: 10,bottom: 10),
             child: Row(children: [
               //Text("Tapittek",style: TextStyle(fontStyle: FontStyle.italic,fontWeight: FontWeight.w700,fontSize:35,color:Color(
-                  //0xfff8d026)),),
-                 Spacer(),
-               InkWell(
-                   onTap: (){
-                     Navigator.push(context, MaterialPageRoute(builder: (context)=>chatfriendlist()));
-                   },
-                   child: Icon(Icons.chat)),
+              //0xfff8d026)),),
+
+              // Spacer(),
+              // InkWell(
+              //     onTap: (){
+              //       Navigator.push(context, MaterialPageRoute(builder: (context)=>chatfriendlist()));
+              //     },
+              //     child: Icon(Icons.chat)),
             ],),
           ),
         ),
-
         body:
         FutureBuilder<GetUserPost?>(
-            future:  createAlbum(),
+            future:  createAlbum(Email),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
 
                 return
                   Column(
-                  children: [
-                    //Commonappbar(),
+                    children: [
+                      //Commonappbar(),
 
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Column(
-                            children: [
-                              // listview(),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 20),
+                            child: Column(
+                              children: [
+                                // listview(),
 
-                              Container(
-                                //padding: EdgeInsets.only(top: 23),
-                                child: ListView.separated(
-                                  separatorBuilder: (context, index) {
-                                    return Divider(thickness: 1.5,);
-                                  },
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemBuilder: (context, int index) {
-                                    return Column(children: [
-                                      // Text("Govind"),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment
-                                            .start,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 16, right: 16),
-                                            child: Row(children: [
-
-                                              InkWell(
-                                            onTap: ()
-                                    {
-                                      Navigator.push(context, MaterialPageRoute(
-                                          builder: (context) => Profile()));
+                                Container(
+                                  //padding: EdgeInsets.only(top: 23),
+                                  child: ListView.separated(
+                                    separatorBuilder: (context, index) {
+                                      return Divider(thickness: 1.5,);
                                     },
-                                                child: CircleAvatar(
-                                                  backgroundColor: Colors.grey,
-                                                  backgroundImage:snapshot.data!.posts![index].userDetails![0].profileImage.toString().isNotEmpty
-                                                      ? NetworkImage(snapshot.data!.posts![index].userDetails![0].profileImage.toString())
-                                                      : null,
-                                                ),
-                                              ),
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemBuilder: (context, int index) {
+                                      return
+                                        Column(children: [
+                                          // Text("Govind"),
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment
+                                                .start,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 16, right: 16),
+                                                child: Row(children: [
 
-                                              SizedBox(width: 10,),
-                                              Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(snapshot.data!.posts![index].userDetails![0].name.toString()),
+                                                  InkWell(
+                                                    onTap: ()
+                                                    {
+                                                      Navigator.push(context, MaterialPageRoute(
+                                                          builder: (context) => Profile()));
+                                                    },
+                                                    child: CircleAvatar(
+                                                      backgroundColor: Colors.grey,
+                                                      backgroundImage:snapshot.data!.posts![index].userDetails![0].profileImage.toString().isNotEmpty
+                                                          ? NetworkImage(snapshot.data!.posts![index].userDetails![0].profileImage.toString())
+                                                          : null,
+                                                    ),
+                                                  ),
 
-                                                  //Text("Deven mestry is with Mahesh\nJoshi."),
+                                                  SizedBox(width: 10,),
+                                                  Column(
+                                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                                    children: [
+                                                      Text(snapshot.data!.posts![index].userDetails![0].name.toString()),
+
+                                                      //Text("Deven mestry is with Mahesh\nJoshi."),
+
+                                                    ],),
 
                                                 ],),
+                                              ),
 
-                                            ],),
-                                          ),
+                                              SizedBox(height: 10,),
+                                              Padding(
+                                                padding:  EdgeInsets.only(
+                                                    left: 16, bottom: 5),
+                                                child: Text(snapshot.data!.posts![index].text.toString(),
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w400,
+                                                      fontSize: 14),),
 
-                                          SizedBox(height: 10,),
-                                          Padding(
-                                            padding:  EdgeInsets.only(
-                                                left: 16, bottom: 5),
-                                            child: Text(snapshot.data!.posts![index].text.toString(),
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w400,
-                                                  fontSize: 14),),
+                                              ),
 
-                                          ),
+                                              //SvgPicture.asset("assets/car.svg"),
+                                              //Image.asset("assets/picture.jpg"),
+                                              SizedBox(child:
+                                              Image.network(
+                                                snapshot.data!.posts![index].postImage.toString(),
+                                                fit: BoxFit.fill,)
+                                                , width: double.infinity,
+                                                height: 400,
+                                              ),
 
-                                          //SvgPicture.asset("assets/car.svg"),
-                                          //Image.asset("assets/picture.jpg"),
-                                          SizedBox(child:
-                                          Image.network(
-                                            snapshot.data!.posts![index].postImage.toString(),
-                                            fit: BoxFit.fill,)
-                                            , width: double.infinity,
-                                            height: 400,
-                                          ),
-
-                                          //NetworkImage(snapshot.data!.posts![index].PROFILEIMAGE+image.toString()),
+                                              //NetworkImage(snapshot.data!.posts![index].PROFILEIMAGE+image.toString()),
 
 
-                                          Padding(
-                                            padding: const EdgeInsets.all(16.0),
-                                            child: Column(
-                                              children: [
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment
-                                                      .spaceBetween,
+                                              Padding(
+                                                padding: const EdgeInsets.all(16.0),
+                                                child: Column(
                                                   children: [
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment
+                                                          .spaceBetween,
+                                                      children: [
 
 
-                                                    GestureDetector(
-                                                      onTap: () {
-                                                        setState(() {
-                                                          _isFavorite = !_isFavorite;
-                                                        });
-                                                        _controller
-                                                            .reverse()
-                                                            .then((value) => _controller.forward());
-                                                      },
-                                                      child: Row(
-                                                        children: [
-                                                          ScaleTransition(
-                                                            scale: Tween(begin: 0.7, end: 1.0).animate(
-                                                                CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
-                                                            child: _isFavorite
-                                                                ? const Icon(
-                                                              Icons.favorite,
-                                                              size: 30,
-                                                              color: Colors.red,
-                                                            )
-                                                                : const Icon(
-                                                              Icons.favorite_border,
-                                                              size: 30,
-                                                            ),
+                                                        GestureDetector(
+                                                          onTap: () {
+                                                            likepost(Email,
+                                                                snapshot.data!.posts![index].id.toString()
+                                                            );
+                                                            // print("user login emaillllll"+"${Email}");
+
+                                                            setState(() {
+                                                              _isFavorite = !_isFavorite;
+                                                            });
+                                                            _controller
+                                                                .reverse()
+                                                                .then((value) => _controller.forward());
+                                                          },
+                                                          child: Row(
+                                                            children: [
+                                                              ScaleTransition(
+                                                                scale: Tween(begin: 0.7, end: 1.0).animate(
+                                                                    CurvedAnimation(parent: _controller, curve: Curves.easeOut)),
+                                                                child: _isFavorite
+                                                                    ? const Icon(
+                                                                  Icons.favorite,
+                                                                  size: 30,
+                                                                  color: Colors.red,
+                                                                )
+                                                                    : const Icon(
+                                                                  Icons.favorite_border,
+                                                                  size: 30,
+                                                                ),
+                                                              ),
+                                                              Text(" Like"),
+                                                            ],
                                                           ),
-                                                          Text(" Like"),
-                                                        ],
-                                                      ),
-                                                    ),
+                                                        ),
 
 
 
-                                                    SizedBox(width: 30,),
-                                                    InkWell(
-                                                      onTap:(){
-                                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>Commentsbox()));
-                                                      },
-                                                        child: Row(
-                                                          children: [
-                                                            Icon(Icons.comment),
-                                                            Text(" Comment"),
-                                                          ],
-                                                        )),
+                                                        SizedBox(width: 30,),
+                                                        InkWell(
+                                                            onTap:(){
+                                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>Commentsbox()));
+                                                            },
+                                                            child: Row(
+                                                              children: [
+                                                                Icon(Icons.comment),
+                                                                Text(" Comment"),
+                                                              ],
+                                                            )),
 
 
-                                                    SizedBox(width: 30,),
-                                                    // Image.asset("assets/share.jpg",fit:BoxFit.fill,),
-                                                  ],),
+                                                        SizedBox(width: 30,),
+                                                        // Image.asset("assets/share.jpg",fit:BoxFit.fill,),
+                                                      ],),
 
-                                                SizedBox(height: 16,),
+                                                    SizedBox(height: 16,),
 
-                                                Row(
-                                                  mainAxisAlignment: MainAxisAlignment
-                                                      .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      "Liked by Sachin Kamble and 155 others ",
-                                                      style: TextStyle(
-                                                          fontWeight: FontWeight
-                                                              .w600,
-                                                          fontSize: 11),),
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment
+                                                          .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          "${snapshot.data!.posts![index].likeCount.toString()}",
+                                                          style: TextStyle(
+                                                              fontWeight: FontWeight
+                                                                  .w600,
+                                                              fontSize: 11),),
 
-                                                    Text("4 comments",
-                                                      style: TextStyle(
-                                                          fontWeight: FontWeight
-                                                              .w400,
-                                                          fontSize: 11),),
+                                                        Text("4 comments",
+                                                          style: TextStyle(
+                                                              fontWeight: FontWeight
+                                                                  .w400,
+                                                              fontSize: 11),),
 
-                                                  ],)
-                                              ],
-                                            ),
-                                          )
+                                                      ],)
+                                                  ],
+                                                ),
+                                              )
 
-                                        ],
-                                      ),
+                                            ],
+                                          ),
 
-                                    ],);
-                                  },
-                                  itemCount: snapshot.data!.posts!.length,
-                                  //itemCount: 10,
+                                        ],);
+                                    },
+                                    itemCount: snapshot.data!.posts!.length,
+                                    //itemCount: 10,
+
+                                  ),
 
                                 ),
 
-                              ),
-
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                );
+                    ],
+                  );
               }
 
               else{
@@ -391,7 +414,7 @@ class _homepageState extends State<homepage>with TickerProviderStateMixin  {
 
                                     Center(child: photoUrl?
                                     Text( snapshot.data!.posts![0].userDetails![0].name ?? "",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700),)
-                                    :Text("Name"),
+                                        :Text("Name"),
                                     ),
                                   ],
                                 ),
@@ -632,29 +655,34 @@ Widget listview(){
 //https://test.pearl-developer.com/mdk/public/api/get-all-posts
 
 
-Future<String?> getToken() async {
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  return prefs.getString('token');
-}
+// Future<String?> getToken() async {
+//   final SharedPreferences prefs = await SharedPreferences.getInstance();
+//   return prefs.getString('token');
+// }
 
-Future<GetUserPost?> createAlbum( ) async {
-  var token;
-  getToken();
+Future<GetUserPost?> createAlbum(Email ) async {
+ // var token;
   var headers = {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Authorization': 'Bearer $token',
+    'Authorization': 'Bearer '+"${AppPreferences.getToken()!}"
   };
-  final response = await http.post(
-     Uri.parse('https://test.pearl-developer.com/mdk/public/api/get-all-posts'),
-    //Uri.parse('https://test.pearl-developer.com/mdk/public/api/get-user-posts'),
-    headers: headers,
+  var request = http.MultipartRequest('POST', Uri.parse('https://test.pearl-developer.com/mdk/public/api/get-all-posts'));
+  request.fields.addAll({
+    'email': Email
+    //'email': 'govindkumar@gmail.com'
+  });
 
-  );
-  print(response.statusCode);
+  request.headers.addAll(headers);
+
+  http.StreamedResponse response = await request.send();
+
   if (response.statusCode == 200) {
-    return GetUserPost.fromJson(jsonDecode(response.body));
+    print("home page posts"+await response.stream.bytesToString());
   }
+  else {
+    print(response.reasonPhrase);
+  }
+
+
 }
 
 
@@ -676,6 +704,31 @@ Future<GetUserPost?> userprofile() async {
     return GetUserPost.fromJson(jsonDecode(response.body));
   }
 }
+
+Future likepost(email,id) async {var headers = {
+  'Authorization': 'Bearer '+"${AppPreferences.getToken()!}"
+};
+var request = http.MultipartRequest('POST', Uri.parse('https://test.pearl-developer.com/mdk/public/api/like-post'));
+request.fields.addAll({
+  'email': email,
+  'post_id': id,
+});
+
+request.headers.addAll(headers);
+
+http.StreamedResponse response = await request.send();
+
+if (response.statusCode == 200) {
+  print(await response.stream.bytesToString());
+}
+else {
+  print(response.reasonPhrase);
+}
+
+}
+
+
+
 
 
 

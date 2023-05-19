@@ -157,7 +157,7 @@ class _AddnewFriendState extends State<AddnewFriend> {
                                   ],);
 
                             },
-                            itemCount: 35,
+                            itemCount: snapshot.data!.length,
                           ),
                         ],
                       ),

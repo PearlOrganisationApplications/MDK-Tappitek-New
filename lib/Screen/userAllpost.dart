@@ -211,7 +211,7 @@ class _userpostsState extends State<userposts> {
                                                     .spaceBetween,
                                                 children: [
                                                   Text(
-                                                    "Liked by Sachin Kamble and 155 others ",
+                                              snapshot.data!.posts![index].likeCount.toString(),
                                                     style: TextStyle(
                                                         fontWeight: FontWeight
                                                             .w600,

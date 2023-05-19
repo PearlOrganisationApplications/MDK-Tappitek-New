@@ -7,6 +7,7 @@ import 'package:tapittek/Screen/bottom%20navigator%20screen/homepage.dart';
 import 'package:tapittek/Utils/app_preferences.dart';
 import 'Screen/LoginFlow/SignIn.dart';
 import 'Screen/homescreen.dart';
+import 'View_Model/my_friend_list.dart';
 import 'Viewmodel/socialmedialappviewmodel.dart';
 
 
@@ -24,6 +25,7 @@ Future<void> main() async{
   MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => SocialMediaappViewModel()),
+      ChangeNotifierProvider(create: (_) => YourFriendList()),
     ],
     child:  MyApp(),
   );

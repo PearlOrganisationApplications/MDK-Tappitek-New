@@ -32,6 +32,10 @@ class _signupscreenState extends State<signupscreen> {
   late String stateValue;
   late String cityValue;
   File? pickedpic;
+
+  late String genderr;
+   String? gen;
+   String? completephone;
   void imagePickerOption() {
     showModalBottomSheet(
       shape: RoundedRectangleBorder(
@@ -176,6 +180,11 @@ class _signupscreenState extends State<signupscreen> {
   TextEditingController emailController =   TextEditingController();
   TextEditingController phoneController =   TextEditingController();
   TextEditingController nameController =   TextEditingController();
+  TextEditingController currentaddresscontroller =   TextEditingController();
+  TextEditingController pincodecontroller =   TextEditingController();
+
+
+
   TextEditingController uniquenumber =   TextEditingController();
   bool _validate = false;
   TextEditingController passwordController =  TextEditingController();
@@ -208,84 +217,105 @@ class _signupscreenState extends State<signupscreen> {
     }
   }*/
 
-  Future login( name,phone,email,password,)async{
-    try{
+  // Future login( name,phone,email,password,)async{
+  //   try{
+  //     var body = json.encode({
+  //       'name': name,
+  //       'phone': phone,
+  //       'email': email,
+  //       'password': password,
+  //       'image_ext': '.png'
+  //     });
+  //     var  url = "https://test.pearl-developer.com/mdk/public/api/signup";
+  //     var response= await http.post(Uri.parse(url),headers: {
+  //       'Content-type': 'application/json',
+  //       'Accept': 'application/json',
+  //     },
+  //
+  //       body: body,
+  //     );
+  //
+  //
+  //     if (response.statusCode == 201) {
+  //       var data = jsonDecode(response.body);
+  //       print("token id "+data['token']);
+  //       print('Login successfully');
+  //       //print("Govind>>>>>"+await response.stream.bytesToString());
+  //       print("Govind   "+response.toString());
+  //       Fluttertoast.showToast(msg: "registerd");
+  //       AppPreferences.saveToken(token: data['token']);
+  //       Navigator.push(
+  //           context,
+  //           MaterialPageRoute(builder: (context) =>  HomeScreen()));
+  //
+  //     }
+  //     else if (response.statusCode == 400) {
+  //       Fluttertoast.showToast(
+  //           msg: "Already registerd",
+  //           toastLength: Toast.LENGTH_SHORT,
+  //           gravity: ToastGravity.BOTTOM,
+  //           timeInSecForIosWeb: 1,
+  //           textColor: Colors.black,
+  //           backgroundColor: Colors.red,
+  //           fontSize: 16.0
+  //       );
+  //     }
+  //
+  //     else {
+  //       Fluttertoast.showToast(msg: "Internal server error");
+  //
+  //       print("status code signup""${response.statusCode}");
+  //       print("testinggg"+response.reasonPhrase.toString());
+  //       print('failedd');
+  //     }
+  //   }
+  //   catch(e){
+  //     print(e);
+  //   }
+  // }
 
-      //var request = http.MultipartRequest('POST', Uri.parse('https://test.pearl-developer.com/mdk/public/api/signup'));
-      /*     request.fields.addAll({
-        'name': name,
-        'phone': phone,
-        'email': email,
-        'password': password,
-        'image_ext': '.png'
-      });*/
+//currentadress,pincode,state,city,dob,gender,country
 
-      var body = json.encode({
-        'name': name,
-        'phone': phone,
-        'email': email,
-        'password': password,
-        'image_ext': '.png'
-      });
-      var  url = "https://test.pearl-developer.com/mdk/public/api/signup";
-      var response= await http.post(Uri.parse(url),headers: {
-        'Content-type': 'application/json',
-        'Accept': 'application/json',
-      },
+  loginn(email,name,phone,password,currentaddress,pincode,state,city,dob,gender,country,profilepic) async {
+    var request = http.MultipartRequest('POST', Uri.parse('https://test.pearl-developer.com/mdk/public/api/create-profile'));
+    request.fields.addAll({
+      'email': email,
+      'name': name,
+      'phone': phone,
+      'password': password,
+      'current_address': currentaddress,
+      'pincode': pincode,
+      'state': state,
+      'city': city,
+      'dob': dob,
+      'gender': gender,
+      'country': country
+    });
+    request.files.add(await http.MultipartFile.fromPath('profile_pic',profilepic));
 
-        body: body,
-      );
+    http.StreamedResponse response = await request.send();
 
-      /*  Response response = await post(
-          Uri.parse('https://test.pearl-developer.com/mdk/public/api/signup'),
-          body: {
-            'email' : emailController,
-            'password' : passwordController,
-            'name': 'govind rajpoot',
-            'phone': '7500620349',
-            'image_ext': '.png'
-          }
-      );*/
-      // http.StreamedResponse response = await request.send();
+    if (response.statusCode == 200) {
+    print(await response.stream.bytesToString());
+    //Fluttertoast.showToast(msg: "Login successfully");
 
-
-
-      if (response.statusCode == 201) {
-        var data = jsonDecode(response.body);
-        print("token id "+data['token']);
-        print('Login successfully');
-        //print("Govind>>>>>"+await response.stream.bytesToString());
-        print("Govind   "+response.toString());
-        Fluttertoast.showToast(msg: "registerd");
-        AppPreferences.saveToken(token: data['token']);
-        Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) =>  HomeScreen()));
-
-      }
-      else if (response.statusCode == 400) {
-        Fluttertoast.showToast(
-            msg: "Already registerd",
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.BOTTOM,
-            timeInSecForIosWeb: 1,
-            textColor: Colors.black,
-            backgroundColor: Colors.red,
-            fontSize: 16.0
-        );
-      }
-
-      else {
-        Fluttertoast.showToast(msg: "Internal server error");
-
-        print("status code signup""${response.statusCode}");
-        print("testinggg"+response.reasonPhrase.toString());
-        print('failedd');
-      }
+    Navigator.push(context,MaterialPageRoute(builder: (context) =>  HomeScreen()));
     }
-    catch(e){
-      print(e);
+    else if (response.statusCode ==422){
+      print("status 422"+await response.stream.bytesToString());
+
+      Fluttertoast.showToast(msg: "Email address alread registerd");
+      Navigator.push(context,MaterialPageRoute(builder: (context) =>  signinscreen()));
+
     }
+    else {
+      print("status internal problem "+await response.stream.bytesToString());
+
+      print("status errorrr"+"${response.reasonPhrase}");
+    Fluttertoast.showToast(msg: "Internal problem");
+
+    }
+
   }
 
 
@@ -412,28 +442,6 @@ class _signupscreenState extends State<signupscreen> {
                   ),
                   SizedBox(height: 10,),
 //Phone
-                  TextField(
-                    controller: phoneController,
-                    onChanged: (value) {
-                      _email = value;
-                    },
-                    decoration: InputDecoration(
-                      floatingLabelBehavior: FloatingLabelBehavior.never, //Hides label on focus or if filled
-                      labelText: "Phone",
-                      errorText: _validate ? 'Value Can\'t Be Empty' : null,
-
-                      filled: true, // Needed for adding a fill color
-                      //fillColor: Colors.grey.shade800,
-                      isDense: true,  // Reduces height a bit
-                      border: OutlineInputBorder(
-                        // borderSide: BorderSide.none,              // No border
-                        borderRadius: BorderRadius.circular(12),  // Apply corner radius
-                      ),
-                      prefixIcon: Icon(Icons.person, size: 24),
-                    ),
-                  ),
-                  SizedBox(height: 10,),
-//Phone
 
                   IntlPhoneField(
                     decoration: InputDecoration(
@@ -445,13 +453,17 @@ class _signupscreenState extends State<signupscreen> {
                     ),
                     initialCountryCode: 'IN',
                     onChanged: (phone) {
-                      print(phone.completeNumber);
+                      completephone = phone.completeNumber.toString();
+                      print("Phoneee"+"${phone.completeNumber}");
+                      print("Phoneenuuu"+"${phone.countryISOCode}");
+                      print("Phnu"+"${phone.number}");
                     },
                   ),
                   SizedBox(height: 10,),
 
 // Current Address
                   TextField(
+                    controller: currentaddresscontroller,
                     decoration: InputDecoration(
                       floatingLabelBehavior: FloatingLabelBehavior.never, //Hides label on focus or if filled
                       labelText: "Current address",
@@ -469,6 +481,7 @@ class _signupscreenState extends State<signupscreen> {
                   SizedBox(height: 10,),
 //PIN code
                   TextField(
+                    controller: pincodecontroller,
                     keyboardType: TextInputType.phone,
                     //inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     decoration: InputDecoration(
@@ -519,14 +532,14 @@ class _signupscreenState extends State<signupscreen> {
                             },
 
                           ),
-                          // InkWell(
-                          //     onTap:(){
-                          //       print('country selected is $countryValue');
-                          //       print('country selected is $stateValue');
-                          //       print('country selected is $cityValue');
-                          //     },
-                          //     child: Text(' Check')
-                          // )
+                          InkWell(
+                              onTap:(){
+                                print('country selected is $countryValue');
+                                print('country selected is $stateValue');
+                                print('country selected is $cityValue');
+                              },
+                              child: Text(' Check')
+                          )
                         ],
                       )
                   ),
@@ -560,7 +573,7 @@ class _signupscreenState extends State<signupscreen> {
 
                       if (pickedDate != null) {
                         dateInputController.text =
-                            DateFormat('dd MMMM yyyy').format(pickedDate);
+                            DateFormat('yyyy-MM-dd').format(pickedDate);
                       }
                     },
                   ),
@@ -586,7 +599,17 @@ class _signupscreenState extends State<signupscreen> {
                           color: Colors.white, fontWeight: FontWeight.normal),
                       onChanged: (Gender? gender) {
                         print(gender);
+                        genderr= gender.toString();
+                        //print("gender>>>>>>>>>>"+genderr.replaceRange(0,7,""));
+                        gen =  genderr.replaceRange(0,7,"");
+
+                        // setState(() {
+                        //   gen =  genderr.replaceRange(0,7,"");
+                        // });
+
+                        print("gender>>>>>>>>>>"+genderr);
                       },
+
                       equallyAligned: true,
                       animationDuration: Duration(milliseconds: 300),
                       isCircular: true,
@@ -696,6 +719,20 @@ class _signupscreenState extends State<signupscreen> {
 
                         //  login(nameController.text.toString(),phoneController.text.toString(),emailController.text.toString(), passwordController.text.toString());
 
+                        print("user name---------"+"${nameController.text}");
+                        print("user email---------"+"${emailController.text}");
+                        print("user phone---------"+"${phoneController.text}");
+                        print("user phone contry---------"+"${completephone}");
+                        print("user address---------"+"${currentaddresscontroller.text}");
+                        print("user pin---------"+"${pincodecontroller.text}");
+                        print("user password---------"+"${passwordController.text}");
+                        print("user Date OF Birth---------"+"${dateInputController.text}");
+                        print("gender>>>>>>>>>>"+genderr.replaceRange(0,7,""));
+                        print("gen >>>>>>>>>>>>"+"${gen}");
+
+                          print('country selected is $countryValue');
+                          print('country selected is $stateValue');
+                          print('country selected is $cityValue');
 
                           showVerificationDialog(context);
 
@@ -877,11 +914,32 @@ class _signupscreenState extends State<signupscreen> {
           print('12345678------> ${item['status']} <------12345678');
           if(item['status'] == '201'){
             print("successfully");
-            login(nameController.text.toString(),phoneController.text.toString(),emailController.text.toString(), passwordController.text.toString());
+
+/*
+            print("user name---------"+"${nameController.text}");
+            print("user email---------"+"${emailController.text}");
+            print("user phone---------"+"${phoneController.text}");
+            print("user phone contry---------"+"${completephone}");
+            print("user address---------"+"${currentaddresscontroller.text}");
+            print("user pin---------"+"${pincodecontroller.text}");
+            print("user password---------"+"${passwordController.text}");
+            print("user Date OF Birth---------"+"${dateInputController.text}");
+            print("gender>>>>>>>>>>"+genderr.replaceRange(0,7,""));
+            print("gen >>>>>>>>>>>>"+"${gen}");
+
+            print('country selected is $countryValue');
+            print('country selected is $stateValue');
+            print('country selected is $cityValue');*/
+
+
+            loginn(emailController.text.toString(),nameController.text.toString(),completephone.toString(),
+                passwordController.text.toString(),currentaddresscontroller.text.toString(),pincodecontroller.text.toString(),
+                stateValue,cityValue,dateInputController.text.toString(),gen,countryValue,
+                pickedpic!.path ??"");
             SharedPreferences pref =
             await SharedPreferences.getInstance();
             pref.setString("email", emailController.text);
-            Fluttertoast.showToast(msg: "Registered Successfully ");
+            Fluttertoast.showToast(msg: "Registered Successfully");
           }
           else{
             Fluttertoast.showToast(msg: "Invalid Code");

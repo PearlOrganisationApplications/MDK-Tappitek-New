@@ -70,37 +70,37 @@ class _YourfriendState extends State<Yourfriend> {
                               Text(snapshot.data!.length.toString()+" friends",style: TextStyle(fontSize: 23,fontWeight: FontWeight.w500),),
                               SizedBox(height: 10,),
                               ListView.separated(
-                                separatorBuilder: (context, index) {
-                                  return // SizedBox(height: 14,);
-                                    Divider();
-                                },
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context , int index){
-                                  return Row(
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 40.0,
-                                        backgroundImage:
-                                        NetworkImage(
-                                            snapshot.data![index].profileImage??""),
-                                            //"https://images.unsplash.com/photo-1466112928291-0903b80a9466?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8cHJvZmlsZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"),
-                                        backgroundColor: Colors.grey,
-                                      ),
-                                      SizedBox(width: 10,),
-                                      Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(snapshot.data![index].name??"",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
-                                         // Text("Tarun Gupta",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
-                                          SizedBox(height: 5,),
+                                  separatorBuilder: (context, index) {
+                                    return // SizedBox(height: 14,);
+                                      Divider();
+                                  },
+                                  shrinkWrap: true,
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  itemBuilder: (context , int index){
+                                    return Row(
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 40.0,
+                                          backgroundImage:
+                                          NetworkImage(
+                                              snapshot.data![index].profileImage??""),
+                                          //"https://images.unsplash.com/photo-1466112928291-0903b80a9466?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8cHJvZmlsZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"),
+                                          backgroundColor: Colors.grey,
+                                        ),
+                                        SizedBox(width: 10,),
+                                        Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(snapshot.data![index].name??"",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+                                            // Text("Tarun Gupta",style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
+                                            SizedBox(height: 5,),
 
-                                        ],),
+                                          ],),
 
-                                    ],);
+                                      ],);
 
-                                },
-                                itemCount:snapshot.data!.length
+                                  },
+                                  itemCount:snapshot.data!.length
                               ),
                             ],
                           ),
