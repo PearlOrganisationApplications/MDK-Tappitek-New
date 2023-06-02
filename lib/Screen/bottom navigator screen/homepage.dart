@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tapittek/Utils/configuration.dart';
@@ -8,6 +9,9 @@ import '../../Model/GetUserPost.dart';
 import '../../Model/alluserpostModel.dart';
 import '../../Utils/Api_collection.dart';
 import '../../Utils/app_preferences.dart';
+import '../../Utils/configuration.dart';
+import '../../Utils/configuration.dart';
+import '../../Utils/configuration.dart';
 import '../Chat/chatfriendlist.dart';
 import '../Chat/my_chat.dart';
 import '../Commentsbox.dart';
@@ -15,6 +19,7 @@ import '../LoginFlow/SignIn.dart';
 import '../drawernavigator/device_compatibility.dart';
 import 'Notification.dart';
 import 'package:http/http.dart' as http;
+
 
 import 'Profile/profile.dart';
 
@@ -149,7 +154,7 @@ class _homepageState extends State<homepage>with TickerProviderStateMixin  {
         ),
         body:
         FutureBuilder<GetUserPost?>(
-            future:  createAlbum(Email),
+            future:  createAlbum(Email!),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
 
@@ -522,8 +527,6 @@ class _homepageState extends State<homepage>with TickerProviderStateMixin  {
             ],
           ),
         ),
-
-
       )
       ),
     );
@@ -531,136 +534,7 @@ class _homepageState extends State<homepage>with TickerProviderStateMixin  {
   }
 }
 
-
-
-
-/*
-Widget listview(){
-  Color _favIconColor = Colors.grey;
-  return
-    Container(
-    //padding: EdgeInsets.only(top: 23),
-    child: ListView.separated(
-      separatorBuilder: (context, index) {
-        return Divider(thickness: 1.5,);
-      },
-      shrinkWrap: true,
-      physics:  NeverScrollableScrollPhysics(),
-      itemBuilder: (context , int index){
-        return Column(children: [
-          // Text("Govind"),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 16,right: 16),
-                child: Row(children: [
-                  CircleAvatar(
-                    radius: 30.0,
-                    backgroundImage:
-                    NetworkImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQThNbRv-cwCjO9vnelKnZqbxy4qQcl3Xdcrhf4C8xHsg&usqp=CAU&ec=48600112"),
-                    backgroundColor: Colors.transparent,
-                  ),
-                  */
-/* Container(
-                    child:
-                   // SvgPicture.asset("assets/ell.svg"),
-                   Image.asset("assets/dp.jpg",fit:BoxFit.fill,),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),color: Colors.red,),
-                    height: 70,width: 70,),*//*
-
-                  SizedBox(width: 10,),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Deven mestry is with Mahesh\nJoshi."),
-                   */
-/*   Row(children: [
-                        Text("1 h .  Mumbai, Maharastra .",style: TextStyle(color: Color(0xff999999,),fontSize: 14,fontWeight: FontWeight.w400),),
-                        Icon(Icons.people,color: Color(0xff999999),),
-                      ],)*//*
-
-
-                    ],),
-
-                ],),
-
-              ),
-              SizedBox(height: 10,),
-              Padding(
-                padding: const EdgeInsets.only(left: 16,bottom: 5),
-                child: Text("Old is Gold..!! ",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 14),),
-
-              ),
-              //SvgPicture.asset("assets/car.svg"),
-              Image.asset("assets/picture.jpg"),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-
-                      InkWell(
-                          onTap: (){
-                            setState(() {
-                              if(_favIconColor == Colors.grey){
-                                _favIconColor = Colors.red;
-                              }else{
-                                _favIconColor = Colors.grey;
-                              }
-                            });
-                          },
-                          child: Icon(Icons.thumb_up_alt_rounded)
-
-                      ),
-                      SizedBox(width: 30,),
-                      Icon(Icons.comment),
-
-
-                      SizedBox(width: 30,),
-                     // Image.asset("assets/share.jpg",fit:BoxFit.fill,),
-                    ],),
-
-                    SizedBox(height: 16,),
-
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text("Liked by Sachin Kamble and 155 others ",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 11),),
-
-                        Text("4 comments",style: TextStyle(fontWeight: FontWeight.w400,fontSize: 11),),
-
-                      ],)
-                  ],
-                ),
-              )
-
-            ],
-          ),
-
-        ],);
-
-      },
-      itemCount: 5,
-
-    ),
-
-  );
-}
-*/
-
-
-//https://test.pearl-developer.com/mdk/public/api/get-all-posts
-
-
-// Future<String?> getToken() async {
-//   final SharedPreferences prefs = await SharedPreferences.getInstance();
-//   return prefs.getString('token');
-// }
-
-Future<GetUserPost?> createAlbum(Email ) async {
+Future<GetUserPost?> createAlbuma(Email ) async {
  // var token;
   var headers = {
     'Authorization': 'Bearer '+"${AppPreferences.getToken()!}"
@@ -670,19 +544,50 @@ Future<GetUserPost?> createAlbum(Email ) async {
     'email': Email
     //'email': 'govindkumar@gmail.com'
   });
-
   request.headers.addAll(headers);
-
   http.StreamedResponse response = await request.send();
-
   if (response.statusCode == 200) {
     print("home page posts"+await response.stream.bytesToString());
   }
   else {
     print(response.reasonPhrase);
   }
+}
 
 
+Future<GetUserPost?> createAlbum(String Email) async {
+  Dio dio = Dio();
+
+  try {
+    // var token;
+    var headers = {
+      'Authorization': 'Bearer ${AppPreferences.getToken()!}',
+    };
+
+    var formData = FormData.fromMap({
+      'email': Email,
+      //'email': 'govindkumar@gmail.com'
+    });
+
+    Response response = await dio.post(
+      'https://test.pearl-developer.com/mdk/public/api/get-all-posts',
+      data: formData,
+      options: Options(headers: headers),
+    );
+
+    if (response.statusCode == 200) {
+      print("home page posts: ${response.data}");
+    } else {
+      print(response.statusMessage);
+    }
+
+    // Parse and return the GetUserPost object
+    return GetUserPost.fromJson(response.data);
+  } catch (e) {
+    // Handle any errors
+    print(e);
+    return null;
+  }
 }
 
 
@@ -690,7 +595,12 @@ Future<GetUserPost?> createAlbum(Email ) async {
 
 
 
-Future<GetUserPost?> userprofile() async {
+
+
+
+
+
+/*Future<GetUserPost?> userprofile() async {
   var headers = {
     'Authorization': 'Bearer '+"${AppPreferences.getToken()!}"
   };
@@ -701,9 +611,49 @@ Future<GetUserPost?> userprofile() async {
   );
   print(response.statusCode);
   if (response.statusCode == 200) {
+
     return GetUserPost.fromJson(jsonDecode(response.body));
   }
+}*/
+
+
+
+Future<GetUserPost?> userprofile() async {
+  // Create Dio instance
+  Dio dio = Dio();
+
+  // Define the headers
+  Map<String, String> headers = {
+    'Authorization': 'Bearer '+"${AppPreferences.getToken()!}"
+  };
+
+  // Define the API endpoint
+  String url = 'https://test.pearl-developer.com/mdk/public/api/get-user-posts';
+
+  try {
+    // Make the API call
+    Response response = await dio.get(url, options: Options(headers: headers));
+
+    // Handle the response
+    if (response.statusCode == 200) {
+      return GetUserPost.fromJson(response.data);
+
+      // API call successful
+      print(response.data);
+    } else {
+      // API call failed
+      print('API call failed with status code ${response.statusCode}');
+    }
+  } catch (error) {
+    // Handle any errors
+    print('An error occurred: $error');
+  }
 }
+
+
+
+
+
 
 Future likepost(email,id) async {var headers = {
   'Authorization': 'Bearer '+"${AppPreferences.getToken()!}"
@@ -719,6 +669,7 @@ request.headers.addAll(headers);
 http.StreamedResponse response = await request.send();
 
 if (response.statusCode == 200) {
+
   print(await response.stream.bytesToString());
 }
 else {
